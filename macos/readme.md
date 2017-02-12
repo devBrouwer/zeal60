@@ -4,21 +4,31 @@ In order to get started, you'll need both this repo, as well as the qmk-firmware
 
 ```
 cd ~
-git clone https://github.com/Wilba6582/zeal60
+git clone --recursive https://github.com/Wilba6582/zeal60
 git clone https://github.com/qmk/qmk_firmware
 ```
 
-You'll also need the HID API (using [Homebrew](https://homebrew.sh):
+You'll also need the HID API, Fox Toolkit (needs XQuartz) and LibUSB (using [Homebrew](https://homebrew.sh):
 
-`brew install hidapi`
+```
+brew cask install xquartz
+brew install hidapi fox libusb libtool automake
+```
 
-Now copy the hidapi.h file to the correct folder:
+Now compile HIDUSB:
 
-`cp /usr/local/Cellar/hidapi/0.8.0-rc1/include/hidapi/hidapi.h ~/zeal60/hidapi`
+```
+cd ~/zeal60/hidapi
+./bootstrap
+./configure
+make
+sudo make install
+cd ..
+```
 
 The enter the dir for the makefile:
 
-`cd zeal60/zeal60`
+`cd ~/zeal60/zeal60`
 
 And run `make` in order to compile: 
 
@@ -34,5 +44,4 @@ And to test it out:
 
 ```
 ./zeal60
-*** Error: Device not found
 ```
